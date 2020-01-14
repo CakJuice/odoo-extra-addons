@@ -4,19 +4,9 @@ from odoo.addons.web.controllers.main import Home, ensure_db
 from odoo import http, _
 from odoo.http import request
 
-params = request.env['ir.config_parameter'].sudo()
-
-
-def check_login_recaptcha():
-    return params.get_param('login_google_recaptcha')
-
-
-def get_recaptcha_site_key():
-    return params.get_param('google_recaptcha_site_key')
-
-
-def get_recaptcha_secret_key():
-    return params.get_param('google_recaptcha_secret_key')
+LOGIN_PARAM = 'login_google_recaptcha'
+SITE_KEY_PARAM = 'google_recaptcha_site_key'
+SECRET_KEY_PARAM = 'google_recaptcha_secret_key'
 
 
 def verify_recaptcha(captcha_data):
@@ -28,8 +18,9 @@ class HomeRecaptcha(Home):
     @http.route()
     def web_login(self, redirect=None, **kw):
         ensure_db()
-        login_recaptcha = check_login_recaptcha()
-        recaptcha_site_key = get_recaptcha_site_key()
+        params = request.env['ir.config_parameter'].sudo()
+        login_recaptcha = params.get_param(LOGIN_PARAM)
+        recaptcha_site_key = params.get_param(SITE_KEY_PARAM)
         request.params.update({
             'login_recaptcha': login_recaptcha,
             'recaptcha_site_key': recaptcha_site_key
@@ -40,7 +31,7 @@ class HomeRecaptcha(Home):
             if recaptcha_site_key:
                 values = request.params.copy()
                 captcha_data = {
-                    'secret': get_recaptcha_secret_key(),
+                    'secret': params.get_param(SECRET_KEY_PARAM),
                     'response': request.params['field-recaptcha-response'],
                 }
 
