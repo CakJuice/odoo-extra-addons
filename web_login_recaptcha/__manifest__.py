@@ -15,7 +15,7 @@ Protect login page with Google Recaptcha
     'category': 'Uncategorized',
     'version': '13.0.1',
     'images': [
-        'static/description/icon.png',
+        'static/description/main_screenshot.png',
         'static/description/ss_recaptcha_1.png',
         'static/description/ss_recaptcha_2.png',
     ],
@@ -26,4 +26,5 @@ Protect login page with Google Recaptcha
     ],
     'application': False,
     'installable': True,
+    'license': 'LGPL-3',
 }
