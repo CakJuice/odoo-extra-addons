@@ -11,7 +11,7 @@
                         <field name="login_google_recaptcha"/>
                     </div>
                     <div class="o_setting_right_pane" id="web_google_recaptcha_settings">
-                    <label for="login_google_recaptcha"/>
+                        <label for="login_google_recaptcha"/>
                         <div class="text-muted">
                             Using Google Recaptcha for Login
                         </div>
