@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+    <template id="web_signup_recaptcha.field_response_recaptcha" name="Field Response Recaptcha">
+        <textarea name="field-recaptcha-response" id="field-recaptcha-response" class="d-none"/>
+    </template>
+
+    <template id="web_signup_recaptcha.init_recaptcha" name="Init Recaptcha Script">
+        <script t-attf-src="https://www.google.com/recaptcha/api.js?render={{ recaptcha_site_key }}"/>
+        <script>
+            grecaptcha.ready(function() {
+                grecaptcha.execute('<t t-esc="recaptcha_site_key"/>', {action: 'login'}).then(function(token) {
+                    document.getElementById('field-recaptcha-response').innerHTML = token;
+                });
+            });
+        </script>
+    </template>
+
+    <template id="web_signup_recaptcha.signup" inherit_id="auth_signup.signup" name="Signup Recaptcha">
+        <xpath expr="//p[hasclass('alert-danger')]" position="before">
+            <t t-if="signup_recaptcha" t-call="web_signup_recaptcha.field_response_recaptcha"/>
+        </xpath>
+        <xpath expr="." position="inside">
+            <t t-if="signup_recaptcha" t-call="web_signup_recaptcha.init_recaptcha"/>
+        </xpath>
+    </template>
+
+    <template id="web_signup_recaptcha.reset_password" inherit_id="auth_signup.reset_password" name="Reset Password Recaptcha">
+        <xpath expr="//p[hasclass('alert-danger')]" position="before">
+            <t t-if="signup_recaptcha" t-call="web_signup_recaptcha.field_response_recaptcha"/>
+        </xpath>
+        <xpath expr="." position="inside">
+            <t t-if="signup_recaptcha" t-call="web_signup_recaptcha.init_recaptcha"/>
+        </xpath>
+    </template>
+</odoo>
