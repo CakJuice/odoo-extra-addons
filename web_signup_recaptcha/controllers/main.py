@@ -48,6 +48,8 @@ class AuthSignupHomeRecaptcha(AuthSignupHome):
                 response = verify_recaptcha(captcha_data)
                 is_captcha_verified = response.get('success')
 
+            print('---- check captcha ----', is_captcha_verified, recaptcha_site_key, captcha_data)
+
             if not is_captcha_verified:
                 values['error'] = _("Invalid reCaptcha")
                 response = request.render('auth_signup.signup', values)
