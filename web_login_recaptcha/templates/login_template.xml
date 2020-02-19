@@ -12,7 +12,7 @@
                 <script>
                     grecaptcha.ready(function() {
                         grecaptcha.execute('<t t-esc="recaptcha_site_key"/>', {action: 'login'}).then(function(token) {
-                            document.getElementById('field-recaptcha-response').innerHTML = token;
+                            document.getElementById('field-recaptcha-response').value = token;
                         });
                     });
                 </script>
