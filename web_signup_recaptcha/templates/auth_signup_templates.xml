@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <odoo>
     <template id="web_signup_recaptcha.field_response_recaptcha" name="Field Response Recaptcha">
-        <textarea name="field-recaptcha-response" id="field-recaptcha-response" class="d-none"/>
+        <input type="hidden" name="field-recaptcha-response" id="field-recaptcha-response"/>
     </template>
 
     <template id="web_signup_recaptcha.init_recaptcha" name="Init Recaptcha Script">

@@ -3,7 +3,7 @@
     <template id="login" inherit_id="web.login" name="Login Google Recaptcha">
         <xpath expr="//div[hasclass('field-password')]" position="after">
             <t t-if="login_recaptcha">
-                <textarea name="field-recaptcha-response" id="field-recaptcha-response" class="d-none"/>
+                <input type="hidden" name="field-recaptcha-response" id="field-recaptcha-response"/>
             </t>
         </xpath>
         <xpath expr="." position="inside">
